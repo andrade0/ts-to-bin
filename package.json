@@ -1,0 +1,38 @@
+{
+  "name": "ts-to-bin",
+  "version": "1.0.0",
+  "description": "Minimalistic boilerplate to create binary executable programs from TypeScript.",
+  "engines": {
+    "node": ">= 12.13 <13"
+  },
+  "devDependencies": {
+    "@types/node": "^12.12.5",
+    "pkg": "^4.4.4",
+    "prettier": "~1.18.2",
+    "rimraf": "^3.0.0",
+    "tslint": "~5.20.1",
+    "tslint-config-prettier": "1.18.0",
+    "tslint-microsoft-contrib": "~6.2.0",
+    "tsutils": "~3.17.0",
+    "typescript": "~3.7.2"
+  },
+  "scripts": {
+    "start": "npm run build && node build/src/main.js",
+    "build": "tsc -p tsconfig.release.json",
+    "lint": "tslint -t stylish --project \"tsconfig.json\"",
+    "package": "node node_modules/@zeit/ncc/dist/ncc/cli.js build build/src/main.js -o package",
+    "bin": "npm run build && npm run package && ./node_modules/.bin/pkg ./package/index.js --output bin",
+    "execute-bin": "npm run build && npm run package && npm run bin && ./bin"
+  },
+  "author": "Olivier andrade",
+  "license": "Apache-2.0",
+  "dependencies": {
+    "@babel/preset-env": "^7.8.6",
+    "@types/async": "^3.2.1",
+    "@types/image-size": "^0.8.0",
+    "@zeit/ncc": "^0.21.1",
+    "reflect-metadata": "^0.1.13",
+    "tslib": "~1.10.0"
+  },
+  "keywords": ["typescript", "ncc", "binary"]
+}
